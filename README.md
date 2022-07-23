@@ -1,4 +1,4 @@
-#weatherinator
+<h2>weatherinator</h2>
 
 A dyanamic weather forcasting application having multiple features like : 
 temperature

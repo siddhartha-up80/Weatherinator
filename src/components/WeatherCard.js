@@ -10,28 +10,30 @@ const WeatherCard = ({
   country,
   sunset,
 }) => {
+  const [theme, setTheme] = React.useState("bg-yellow-500")
   const [weatherState, setWeatheState] = React.useState("");
   const [wallpaper, setWallpaper] = React.useState(
     "url(https://source.unsplash.com/random/2000x2000/?sunny)"
   );
-    const [theme, setTheme] = React.useState("gray")
+
 
   useEffect(() => {
     if (weathermood) {
       switch (weathermood) {
         case "Clouds":
+          setTheme("bg-gray-800");
           setWeatheState("wi-day-cloudy");
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?clouds)"
           );
-          setTheme("gray")
+          
           break;
         case "Haze":
           setWeatheState("wi-fog");
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?fog)"
           );
-          setTheme("gray")
+          setTheme("bg-pink-400")
           break;
         case "Clear":
           setWeatheState("wi-day-sunny");
@@ -39,14 +41,15 @@ const WeatherCard = ({
             "url(https://source.unsplash.com/random/2000x2000/?sunny)"
 
           );
-          setTheme("yellow")
+          setTheme("bg-yellow-500")
           break;
+
         case "Mist":
           setWeatheState("wi-dust");
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?mist)"
           );
-          setTheme("red")
+          setTheme("bg-sky-600")
           break;
 
         case "Rain":
@@ -54,7 +57,7 @@ const WeatherCard = ({
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?rain)"
           );
-          setTheme("sky")
+          setTheme("bg-blue-700")
           break;
 
         default:
@@ -63,7 +66,7 @@ const WeatherCard = ({
             "url(https://source.unsplash.com/random/2000x2000/?happy)"
             
           );
-          setTheme("yellow")
+          setTheme("bg-yellow-800")
           break;
       }
     }
@@ -87,7 +90,7 @@ const WeatherCard = ({
           <div className="weatherIcon md:mt-10 mt-3 pt-5 flex flex-row justify-center md:text-7xl text-5xl">
             <i className={`wi ${weatherState}`}></i>
           </div>
-          <div className={`flex flex-row justify-between bg-${theme}-800 text-white md:pt-10 md:pb-10 pt-3 pb-3`}>
+          <div className={`flex flex-row justify-between ${theme} text-white md:pt-10 md:pb-10 pt-3 pb-3`}>
             <div className="weatherInfo flex justify-between">
               <div className="temperature md:text-6xl text-3xl md:ml-3 ml-1">
                 <span>{temp}&deg; C</span>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WeatherCard from "./WeatherCard";
 import "./style.css";
+
 const Temp = () => {
   const [searchValue, setSearchValue] = useState("agra");
   const [tempInfo, setTempInfo] = useState({});
@@ -39,10 +40,12 @@ const Temp = () => {
     getWeatherInfo();
   }, );
 
+  
+
   return (
     <>
       <div>
-        <div className="text-white bg-gray-800 flex flex-col h-screen">
+        <div className={`text-white bg-gray-800 flex flex-col h-screen`}>
           <div className="search flex flex-row justify-center my-10 ">
             <input
               type="search"

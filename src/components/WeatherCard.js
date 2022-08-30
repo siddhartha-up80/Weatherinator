@@ -10,38 +10,40 @@ const WeatherCard = ({
   country,
   sunset,
 }) => {
-  const [theme, setTheme] = React.useState("bg-yellow-500")
+  const [theme, setTheme] = React.useState("bg-yellow-500");
+  const [border, setBorder] = React.useState("border-yellow-500");
   const [weatherState, setWeatheState] = React.useState("");
   const [wallpaper, setWallpaper] = React.useState(
     "url(https://source.unsplash.com/random/2000x2000/?sunny)"
   );
-
 
   useEffect(() => {
     if (weathermood) {
       switch (weathermood) {
         case "Clouds":
           setTheme("bg-gray-800");
+          setBorder("border-gray-800");
           setWeatheState("wi-day-cloudy");
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?clouds)"
           );
-          
+
           break;
         case "Haze":
           setWeatheState("wi-fog");
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?fog)"
           );
-          setTheme("bg-pink-400")
+          setTheme("bg-pink-400");
+          setBorder("border-pink-400");
           break;
         case "Clear":
           setWeatheState("wi-day-sunny");
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?sunny)"
-
           );
-          setTheme("bg-yellow-500")
+          setTheme("bg-yellow-500");
+          setBorder("border-yellow-500");
           break;
 
         case "Mist":
@@ -49,7 +51,8 @@ const WeatherCard = ({
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?mist)"
           );
-          setTheme("bg-sky-600")
+          setTheme("bg-sky-600");
+          setBorder("border-sky-600");
           break;
 
         case "Rain":
@@ -57,16 +60,17 @@ const WeatherCard = ({
           setWallpaper(
             "url(https://source.unsplash.com/random/2000x2000/?rain)"
           );
-          setTheme("bg-blue-700")
+          setTheme("bg-blue-700");
+          setBorder("border-blue-700");
           break;
 
         default:
           setWeatheState("wi-day-sunny");
           setWeatheState(
             "url(https://source.unsplash.com/random/2000x2000/?happy)"
-            
           );
-          setTheme("bg-yellow-800")
+          setTheme("bg-yellow-800");
+          setBorder("border-yellow-800");
           break;
       }
     }
@@ -86,78 +90,76 @@ const WeatherCard = ({
         className="widget h-screen flex flex-wrap justify-center items-center"
         style={background}
       >
-        <div className="flex flex-col justify-between text-black bg-white rounded-3xl h-1/2 md:h-3/4 w-5/6 md:w-3/5 flex-wrap border-2 border-black border-solid">
-          <div className="weatherIcon md:mt-10 mt-3 pt-5 flex flex-row justify-center md:text-7xl text-5xl">
-            <i className={`wi ${weatherState}`}></i>
+        <div className={`max-w-xs overflow-hidden rounded-lg shadow-lg bg-gray-50 text-gray-800 border-2 border-solid ${border}`}>
+          <div
+            className={`flex flex-col items-center justify-between h-32 p-4 ${theme} bg-center bg-cover`}
+          >
+            <div className="text-5xl text-white">
+              <i className={`wi ${weatherState}`}></i>
+            </div>
+            <p className="px-2 py-1 text-sm tracking-widest text-gray-100 uppercase bg-gray-800 bg-opacity-75 rounded shadow-lg">
+            {weathermood}
+            </p>
           </div>
-          <div className={`flex flex-row justify-between ${theme} text-white md:pt-10 md:pb-10 pt-3 pb-3`}>
-            <div className="weatherInfo flex justify-between">
-              <div className="temperature md:text-6xl text-3xl md:ml-3 ml-1">
-                <span>{temp}&deg; C</span>
+          <div className="flex justify-between p-4">
+            <div className="flex flex-col flex-1 gap-4">
+              <div className="flex justify-center">
+                <div className="flex gap-2">
+                  <span className="text-5xl font-semibold">{temp}&deg; C</span>
+                  
+                </div>
               </div>
-            </div>
-            <div className="description md:ml-10 ml-4 ">
-              <div className="weatherCondition md:text-3xl text-xl uppercase">
-                {weathermood}
-              </div>
-              <div className="place">
-                {name}, {country}
-              </div>
-            </div>
-            <div className="flex flex-col pr-3">
-              <div className="date flex flex-col ml-2 md:text-2xl text-xl">
+              <div className="text-sm flex justify-center gap-10">
+                <div className="flex justify-center items-center">
+                <i className={"wi wi-strong-wind"}></i>{speed} MPH winds.
+                </div>
+
+                <div className="flex flex-col pr-3">
+              <div className="date flex flex-col ml-2">
                 {" "}
                 {`${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`}{" "}
               </div>
-              <div className="date flex flex-col ml-2 md:text-2xl text-xl">
+              <div className="date flex flex-col ml-2">
                 {" "}
                 {`${new Date().getHours()}:${new Date().getMinutes()}`}{" "}
               </div>
             </div>
-          </div>
+                
+              </div>
 
-          {/* our 4column section  */}
-          <div className="extra-temp flex flex-row flex-wrap justify-between md:mb-12 md:ml-5 md:mr-5 mb-8 ml-3 mr-1">
-            <div className="temp-info-minmax ">
-              <div className="two-sided-section flex flex-row justify-between mx-auto mt-2">
-                <p>
+
+              
+            </div>
+            <div className="text-sm leading-loose">
+              <div className="flex items-center"></div>
+            </div>
+          </div>
+          <div className="flex items-center justify-between gap-8 p-2 border-t text-gray-600 border-gray-300">
+            <div className="flex items-center space-x-1">
+            <p>
                   <i className={"wi wi-sunset"}></i>
                 </p>
                 <p className="extra-info-leftside md:mx-5 mx-2">
                   {timeStr} PM <br />
                   Sunset
                 </p>
-              </div>
             </div>
-            <div className="two-sided-section flex flex-row justify-between mx-auto mt-2 ">
-              <p>
+            <div className="flex items-center space-x-1">
+            <p>
                 <i className={"wi wi-humidity"}></i>
               </p>
-              <p className="extra-info-leftside md:mx-5 mx-2">
-                {humidity} <br />
-                Humidity
+              <p className="">
+                {`${humidity}% Humidity`}
               </p>
             </div>
-
-            <div className="weather-extra-info flex flex-row justify-between mx-auto mt-2">
-              <div className="two-sided-section flex flex-row justify-between">
-                <p>
+            <div className="flex items-center space-x-1">
+            <p>
                   <i className={"wi wi-rain"}></i>
                 </p>
                 <p className="extra-info-leftside md:mx-5 mx-2">
                   {pressure} <br />
                   Pressure
                 </p>
-              </div>
-            </div>
-            <div className="two-sided-section flex flex-row justify-between mx-auto mt-2">
-              <p>
-                <i className={"wi wi-strong-wind"}></i>
-              </p>
-              <p className="extra-info-leftside md:mx-5 mx-2">
-                {speed} <br />
-                Speed
-              </p>
             </div>
           </div>
         </div>

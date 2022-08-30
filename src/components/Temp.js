@@ -15,6 +15,7 @@ const Temp = () => {
 
       const { temp, humidity, pressure } = data.main;
       const { main: weathermood } = data.weather[0];
+    
       const { name } = data;
       const { speed } = data.wind;
       const { country, sunset } = data.sys;
